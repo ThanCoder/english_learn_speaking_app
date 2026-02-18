@@ -97,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.6"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      sha256: "09bad715f418841f976c77db72d5398dc1253c21fb9c0c7f0b0b985860b2d58e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -232,6 +240,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      sha256: "6d1264f2dffa1b1101c25a91dff0dc2daee4c18e87cd8538729773c073dbf602"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.6"
   http:
     dependency: transitive
     description:
@@ -332,10 +348,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: e3641ec5d63ebf0d9b41bd43201a66e3fc79a65db5f61fc181f04cd27aab950c
+      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
       url: "https://pub.dev"
     source: hosted
-    version: "1.16.0"
+    version: "1.17.0"
   mime:
     dependency: transitive
     description:
@@ -473,18 +489,26 @@ packages:
     dependency: "direct main"
     description:
       name: t_client
-      sha256: e3051f06ea51afaecb697324ac515dba8355183caee8ab03c43ecb90abe2fb65
+      sha256: baeccaf8eed075b051f95bf24d87553d9d68db10226bfd821bd53e8edf617075
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.6"
+    version: "0.2.0"
+  t_html_parser:
+    dependency: "direct main"
+    description:
+      name: t_html_parser
+      sha256: "3de24b47159e436e40c64e88c8497283f927616c650c3b92448248de7f8f1080"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   t_widgets:
     dependency: "direct main"
     description:
       name: t_widgets
-      sha256: "83c8ea0579b1a82f4c2aff9ba7e0f16be8549231f9b24da99b6a2439ec71c990"
+      sha256: e235964988021ef3c6c93557df37d1adb67e0682e601c5793aeddc0b8b825739
       url: "https://pub.dev"
     source: hosted
-    version: "1.7.4"
+    version: "2.1.0"
   term_glyph:
     dependency: transitive
     description:
@@ -497,18 +521,18 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "522f00f556e73044315fa4585ec3270f1808a4b186c936e612cab0b565ff1e00"
+      sha256: ab2726c1a94d3176a45960b6234466ec367179b87dd74f1611adb1f3b5fb9d55
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.6"
+    version: "0.7.7"
   than_pkg:
     dependency: "direct main"
     description:
       name: than_pkg
-      sha256: "4f98d26126bac8068e7140f5cdf676adf1240ac77440f332afe0d31d48f12add"
+      sha256: "6ddfdf6e1f4be183550982399249be0e433c0dd63b1ee474ce285281af8bf43d"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.3"
+    version: "5.0.0"
   timeago:
     dependency: transitive
     description:

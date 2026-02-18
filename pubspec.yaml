@@ -10,10 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  than_pkg: ^4.5.3
-  t_widgets: ^1.7.4
-  t_client: ^0.1.6
+  than_pkg: ^5.0.0
+  t_widgets: ^2.1.0
+  t_client: ^0.2.0
   flutter_markdown: ^0.7.7+1
+  t_html_parser: ^1.2.0
 
 dev_dependencies:
   flutter_test:

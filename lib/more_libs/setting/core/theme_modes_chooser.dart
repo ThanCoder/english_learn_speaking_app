@@ -1,24 +1,26 @@
-import 'package:english_learn_speaking/more_libs/setting_v2.9.0/setting.dart';
 import 'package:flutter/material.dart';
-import 'package:t_widgets/theme/t_theme_services.dart';
+import 'package:t_widgets/t_widgets.dart';
 import 'package:than_pkg/than_pkg.dart';
+import 'package:english_learn_speaking/more_libs/setting/app_config.dart';
+import 'package:english_learn_speaking/more_libs/setting/setting.dart';
 
-class TThemeModesChooser extends StatefulWidget {
-  const TThemeModesChooser({super.key});
+class ThemeModesChooser extends StatefulWidget {
+  const ThemeModesChooser({super.key});
 
   @override
-  State<TThemeModesChooser> createState() => _TThemeModesChooserState();
+  State<ThemeModesChooser> createState() => _ThemeModesChooserState();
 }
 
-class _TThemeModesChooserState extends State<TThemeModesChooser> {
+class _ThemeModesChooserState extends State<ThemeModesChooser> {
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Icon(Icons.color_lens),
             Text(
               'Theme',
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -27,27 +29,28 @@ class _TThemeModesChooserState extends State<TThemeModesChooser> {
             ValueListenableBuilder(
               valueListenable: Setting.getAppConfigNotifier,
               builder: (context, config, child) {
-                return DropdownButton<TThemeModes>(
+                return DropdownButton<ThemeMode>(
                   padding: EdgeInsets.all(5),
                   borderRadius: BorderRadius.circular(4),
                   value: config.themeMode,
-                  items: TThemeModes.values
+                  items: ThemeMode.values
                       .map(
-                        (e) => DropdownMenuItem<TThemeModes>(
+                        (e) => DropdownMenuItem<ThemeMode>(
                           value: e,
                           child: Text(e.name.toCaptalize()),
                         ),
                       )
                       .toList(),
-                  onChanged: (value) {
+                  onChanged: (value) async {
                     final newConfig = config.copyWith(
                       themeMode: value,
-                      isDarkTheme: value!.isDarkMode,
+                      isDarkTheme: value!.isDarkTheme,
                     );
                     Setting.getAppConfigNotifier.value = newConfig;
-                    newConfig.save();
-                    TThemeServices.instance.init();
-
+                    await newConfig.save();
+                    if (newConfig.themeMode == ThemeMode.system) {
+                      PBrightnessServices.instance.checkCurrentTheme();
+                    }
                     if (!mounted) return;
                     setState(() {});
                   },

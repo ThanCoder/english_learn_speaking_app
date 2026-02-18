@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:t_widgets/theme/t_theme_services.dart';
+import 'package:flutter/material.dart';
 import 'package:than_pkg/than_pkg.dart';
 
 import 'setting.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class AppConfig {
   String customPath;
   String forwardProxyUrl;
@@ -17,7 +16,7 @@ class AppConfig {
   bool isUseForwardProxy;
   bool isUseProxy;
   bool isDarkTheme;
-  TThemeModes themeMode;
+  ThemeMode themeMode;
   AppConfig({
     required this.customPath,
     required this.forwardProxyUrl,
@@ -41,7 +40,7 @@ class AppConfig {
     bool isUseForwardProxy = false,
     bool isUseProxy = false,
     bool isDarkTheme = false,
-    TThemeModes themeMode = TThemeModes.light,
+    ThemeMode themeMode = ThemeMode.system,
   }) {
     return AppConfig(
       customPath: customPath,
@@ -67,7 +66,7 @@ class AppConfig {
     bool? isUseForwardProxy,
     bool? isUseProxy,
     bool? isDarkTheme,
-    TThemeModes? themeMode,
+    ThemeMode? themeMode,
   }) {
     return AppConfig(
       customPath: customPath ?? this.customPath,
@@ -101,7 +100,6 @@ class AppConfig {
   }
 
   factory AppConfig.fromMap(Map<String, dynamic> map) {
-    final TthemeModeStr = map.getString(['themeMode']);
     return AppConfig(
       customPath: map.getString(['customPath']),
       forwardProxyUrl: map.getString(['forwardProxyUrl']),
@@ -112,18 +110,17 @@ class AppConfig {
       isUseForwardProxy: map.getBool(['isUseForwardProxy']),
       isUseProxy: map.getBool(['isUseProxy']),
       isDarkTheme: map.getBool(['isDarkTheme']),
-      themeMode: TThemeModes.getName(TthemeModeStr),
+      themeMode: ThemeModeExtension.getName(map.getString(['themeMode'])),
     );
   }
 
   // void
   Future<void> save() async {
     try {
-      final file = File('${Setting.appConfigPath}/$configName');
+      final file = File('${Setting.appConfigPath}/${Setting.configFileName}');
       final contents = JsonEncoder.withIndent(' ').convert(toMap());
       await file.writeAsString(contents);
-      // appConfigNotifier.value = this;
-      Setting.instance.initSetConfigFile();
+      await Setting.instance.reSetConfig();
     } catch (e) {
       Setting.showDebugLog(e.toString(), tag: 'AppConfig:save');
     }
@@ -131,13 +128,25 @@ class AppConfig {
 
   // get config
   static Future<AppConfig> getConfig() async {
-    final file = File('${Setting.appConfigPath}/$configName');
+    final file = File('${Setting.appConfigPath}/${Setting.configFileName}');
     if (file.existsSync()) {
       final source = await file.readAsString();
       return AppConfig.fromMap(jsonDecode(source));
     }
     return AppConfig.create();
   }
+}
 
-  static String configName = 'main.config.json';
+extension ThemeModeExtension on ThemeMode {
+  static ThemeMode getName(String name) {
+    if (name == ThemeMode.dark.name) {
+      return ThemeMode.dark;
+    }
+    if (name == ThemeMode.light.name) {
+      return ThemeMode.light;
+    }
+    return ThemeMode.system;
+  }
+
+  bool get isDarkTheme => this == ThemeMode.dark;
 }
