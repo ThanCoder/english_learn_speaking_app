@@ -1,3 +1,4 @@
+import 'package:english_learn_speaking/more_libs/desktop_exe/desktop_exe.dart';
 import 'package:flutter/material.dart';
 import 'package:t_widgets/t_widgets.dart';
 import 'package:english_learn_speaking/more_libs/setting/setting.dart';
@@ -15,7 +16,12 @@ class MoreApp extends StatelessWidget {
           Setting.getSettingListTileWidget,
           Setting.getCurrentVersionWidget,
           Setting.getCacheManagerWidget,
+          DesktopExe.createDesktopListTile(
+            context,
+            assetsIconPath: 'assets/logo.webp',
+          ),
           Divider(),
+
           Setting.getThanCoderAboutWidget,
         ],
       ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:t_widgets/t_widgets.dart';
 import 'package:than_pkg/than_pkg.dart';
 import 'package:english_learn_speaking/app/my_app.dart';
-import 'package:english_learn_speaking/more_libs/desktop_exe/desktop_exe.dart';
 import 'package:english_learn_speaking/more_libs/setting/setting.dart';
 
 void main() async {
@@ -23,11 +22,6 @@ void main() async {
   );
 
   if (TPlatform.isDesktop) {
-    await DesktopExe.exportDesktopIcon(
-      name: Setting.instance.appName,
-      assetsIconPath: 'assets/thancoder_logo.png',
-    );
-
     WindowOptions windowOptions = WindowOptions(
       size: Size(602, 568), // စတင်ဖွင့်တဲ့အချိန် window size
 
